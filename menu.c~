@@ -1,0 +1,17 @@
+#include <gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <stdio.h>
+#include "geometrie.h"
+#include "souris.h"
+#include "clavier.h"
+#include "graphique.h"
+#include "globales.h"
+
+
+void init_menu(int cle){
+
+glutAddMenuEntry("effacer", 1);
+glutAddMenuEntry("quitter", 2);
+
+}

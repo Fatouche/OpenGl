@@ -1,0 +1,21 @@
+#include <gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <stdio.h>
+
+void glutMouseFunc(void (*func)(int bouton, int etat,int x, int y)){
+
+  switch(button) 
+      {
+          case GLUT_LEFT_BUTTON:   
+	    if (state == GLUT_DOWN){
+	      printf("Click gauche detecte position x : %i, position y : %i\n",x,y) ;
+	      break;
+	    }
+           case GLUT_RIGHT_BUTTON: 
+	     if(stat == GLUT_DOWN){ 
+	       printf("Bouton droit de la souris clicker\n"); 
+	       break;
+	     }
+      }
+}

@@ -1,0 +1,1 @@
+glutMouseFunc(void (*func)(int bouton, int etat,int x, int y));
