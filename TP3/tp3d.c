@@ -1,35 +1,50 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
+
 #include "graphique.h"
 #include "touches.h"
+#include "define.h"
 
 /* dimensions initiales de la fenêtre d'affichage */
 #define LARGEUR  256
 #define HAUTEUR  256
 
-float trans_axeZ ;
-float angle_rotY ;
-float angle_rotX ;
-float kx ;
-float ky ;
-float kz ;
+float trans_axeZ;
+float rot_axeY;
+float rot_axeX;
+
+float kx;
+float ky;
+float kz;
+
+int angle_helice;
+int helice_active;
+int angle_roue;
+int roue_active;
 
 /**
  * Fonction d'initialisation des paramètres d'affichage
  */
 static void init_screen(void)
 {
-  trans_axeZ = 0 ;
-  angle_rotY = 0 ;
-  angle_rotX = 0 ;
-  kx = 1 ;
-  ky = 1 ;
-  kz = 1 ;
+  glViewport(0, 0, LARGEUR, HAUTEUR);
+  
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60.0,1.0,1.0,50.0);
-  glViewport(0,0,LARGEUR,HAUTEUR);
+  gluPerspective(60.0, 1, 1, 50);
+  trans_axeZ = 0.0;
+  rot_axeY = 0.0;
+  rot_axeX = 0.0;
+
+  kx = 1.0;
+  ky = 1.0;
+  kz = 1.0;
+
+  helice_active = OFF;
+  roue_active = OFF;
+  angle_helice = 0;
+  angle_roue = 0;
 }
 
 
@@ -42,21 +57,25 @@ static void init_screen(void)
  */
 int main (int argc, char *argv[])
 {
-
   glutInit (&argc, argv);
 
   glutInitWindowPosition(100, 100); 
   glutInitWindowSize(LARGEUR, HAUTEUR); 
 
-  glutInitDisplayMode(GLUT_DEPTH);
+  glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE);
 
   glutCreateWindow(argv[0]);
+  
+  glClearColor(1, 1, 1, 1);
+  glClear(GL_COLOR_BUFFER_BIT);
+  
 
   /* choix de la fonction de rafraichissement */
   glutDisplayFunc(dessiner);
   glutReshapeFunc(retailler);
   glutKeyboardFunc(gerer_clavier);
-  glutSpecialUpFunc(specialClavier);
+  glutSpecialUpFunc(gestionClavierSpecial);
+  glutIdleFunc(animer);
 
   init_screen();
 

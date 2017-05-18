@@ -14,10 +14,6 @@ void dessiner(void)
   glPointSize(pointSize);
   glLineWidth(pointSize);
 
-  glBegin(GL_POINTS);
-  glColor3f(1, 0, 0);
-  glVertex2f(mousePoint.x, mousePoint.y);
-  glEnd();
   
   glBegin(GL_POINTS);
   glColor3f(1,0,0);

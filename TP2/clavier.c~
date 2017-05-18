@@ -1,6 +1,0 @@
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <glut.h>
-#include "touches.h"
-
-void gerer_clavier(unsigned char touche,int x,int y){}

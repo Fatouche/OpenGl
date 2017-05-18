@@ -1,29 +1,25 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
+
 #include "graphique.h"
-#include "clavier.h"
 
 /* dimensions initiales de la fenêtre d'affichage */
 #define LARGEUR  256
 #define HAUTEUR  256
 
-float axeZ ;
-float angle_Y ;
-float angle_X ;
 
 /**
  * Fonction d'initialisation des paramètres d'affichage
  */
 static void init_screen(void)
 {
-  axeZ = 0 ;
-  angle_Y = 0 ;
-  angle_X = 0 ;
+  glViewport(0, 0, LARGEUR, HAUTEUR);
+  
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60.0,1.0,1.0,50.0);
-  glViewport(0,0,LARGEUR,HAUTEUR);
+  gluPerspective(60.0, 1, 1, 50);
+  glMatrixMode(GL_MODELVIEW);
 }
 
 

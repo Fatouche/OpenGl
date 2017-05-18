@@ -15,19 +15,20 @@ CC=gcc
 # définition des options de compilation à utiliser
 # -g : en vue d'autoriser l'utilisation du débugger
 # -Wall : afficher le maximum de messages d'erreurs
-OPT= -g -Wall
+OPT= -g -Wall -std=c11
 
 
 # définition des cibles de compilation
 
 tp3d:	tp3d.o graphique.o touches.o
-	$(CC) -o tp3d tp3d.o touches.o graphique.o $(OPT)  $(LIB)
+	$(CC) -o tp3d tp3d.o graphique.o touches.o $(OPT)  $(LIB)
 
 tp3d.o:	tp3d.c
 	$(CC) -c tp3d.c  $(OPT) $(INCLUDE)
 
 graphique.o:	graphique.c
 	$(CC) -c graphique.c  $(OPT) $(INCLUDE)
+
 touches.o:	touches.c
 	$(CC) -c touches.c $(OPT) $(INCLUDE)
 

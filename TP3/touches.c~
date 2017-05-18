@@ -23,7 +23,7 @@ void gerer_clavier(unsigned char touche, int x, int y)
   else if(touche == '2')
     rot_axeX -= 10;
 
-  if(touche == 'h')
+  /*if(touche == 'h')
     {
       if(helice_active == ON)
 	helice_active = OFF;
@@ -37,7 +37,7 @@ void gerer_clavier(unsigned char touche, int x, int y)
 	roue_active = OFF;
       else
 	roue_active = ON;
-    }
+	}*/
   glutPostRedisplay();
 }
 

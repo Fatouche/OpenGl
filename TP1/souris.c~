@@ -16,13 +16,13 @@ void mousePos(int bouton, int etat, int x, int y)
       int halfWidth = glutGet(GLUT_WINDOW_WIDTH)/2;
       int halfHeight = glutGet(GLUT_WINDOW_HEIGHT)/2;
 
-      int mouseXFromHalfWidth = (halfWidth-x);
-      int mouseXFromHalfHeight = (halfHeight-y);
+      int absMouseXFromHalfWidth = (halfWidth-x);
+      int absMouseXFromHalfHeight = (halfHeight-y);
       
-      mousePoint.x = -(mouseXFromHalfWidth/(float)halfWidth);
-      mousePoint.y = (mouseXFromHalfHeight/(float)halfHeight);
+      mousePoint.x = -absMouseXFromHalfWidth;
+      mousePoint.y = -absMouseXFromHalfHeight;
 
-      printf("%.3f, %.3f\n", mousePoint.x, mousePoint.y);
+      printf("%f, %f\n", mousePoint.x, mousePoint.y);
     }
   
   glutPostRedisplay();

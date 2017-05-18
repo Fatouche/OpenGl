@@ -1,7 +1,0 @@
-extern float trans_axeZ;
-extern float angle_rotY;
-extern float angle_rotX;
-extern float scaleX ;
-extern float scaleY ;
-extern float scaleZ ;
-void gerer_clavier(unsigned char touche, int x, int y);

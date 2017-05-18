@@ -1,19 +1,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
-#include "clavier.h"
 
-
-
-void retailler(GLsizei largeur, GLsizei hauteur)
-{
-  if(largeur>hauteur){
-    glViewport((largeur-hauteur)/2, 0, hauteur, largeur);
-  }else{
-    glViewport(0, (hauteur-largeur)/2, largeur, hauteur);
-  }
-  glutPostRedisplay();
-}
 
 
 /** 
@@ -25,6 +13,7 @@ void retailler(GLsizei largeur, GLsizei hauteur)
 static void cube(float dim)
 {
   glBegin(GL_QUADS);
+  
   /* face avant rouge */
   glColor3f(1.0, 0.0, 0.0);
   glVertex3f(-dim/2, -dim/2, dim/2);
@@ -66,7 +55,7 @@ static void cube(float dim)
   glVertex3f(-dim/2, -dim/2, -dim/2);
   glVertex3f( dim/2, -dim/2, -dim/2);
   glVertex3f( dim/2, -dim/2, dim/2);
-
+  
   glEnd();
 }
 
@@ -81,7 +70,6 @@ static void cube(float dim)
 
 static void repere(float dim)
 {
-
   glBegin(GL_LINES);
  
   glColor3f(1.0, 1.0, 1.0);
@@ -111,12 +99,8 @@ void dessiner(void)
   /* raz de la fenetre avec la couleur de fond */
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  glTranslatef(0.0, 0.0, -5.0 + axeZ);
-  glRotatef(20 + angle_Y, 0, 1, 0);
-  glRotatef(angle_X,1,0,0);
-  
+  glTranslatef(0, 0, -5);
+  glRotatef(20, 0, 1, 0);
   /* dessin des objets */
   cube(2.0);
   repere(2.0);
@@ -124,4 +108,17 @@ void dessiner(void)
   glFlush();
   return;
 
+}
+
+extern void retailler(GLsizei largeur, GLsizei hauteur)
+{
+  int cote = hauteur;
+  if(hauteur > largeur)
+    cote = largeur;
+  
+  glViewport(largeur/2 - cote/2,hauteur/2 -cote/2, cote, cote);
+
+  glMatrixMode(GL_PROJECTION);
+  
+  glutPostRedisplay();
 }

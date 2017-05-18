@@ -1,20 +1,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <glut.h>
+
 #include "touches.h"
-
-
-
-void retailler(GLsizei largeur, GLsizei hauteur)
-{
-  if(largeur>hauteur){
-    glViewport((largeur-hauteur)/2, 0, hauteur, largeur);
-  }else{
-    glViewport(0, (hauteur-largeur)/2, largeur, hauteur);
-  }
-  glutPostRedisplay();
-}
-
 
 /** 
  * Fonction permettant de dessiner un cube centré sur l'origine 
@@ -25,6 +13,7 @@ void retailler(GLsizei largeur, GLsizei hauteur)
 static void cube(float dim)
 {
   glBegin(GL_QUADS);
+  
   /* face avant rouge */
   glColor3f(1.0, 0.0, 0.0);
   glVertex3f(-dim/2, -dim/2, dim/2);
@@ -66,7 +55,7 @@ static void cube(float dim)
   glVertex3f(-dim/2, -dim/2, -dim/2);
   glVertex3f( dim/2, -dim/2, -dim/2);
   glVertex3f( dim/2, -dim/2, dim/2);
-
+  
   glEnd();
 }
 
@@ -81,7 +70,6 @@ static void cube(float dim)
 
 static void repere(float dim)
 {
-
   glBegin(GL_LINES);
  
   glColor3f(1.0, 1.0, 1.0);
@@ -112,12 +100,14 @@ void dessiner(void)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-  glTranslatef(0.0, 0.0, -5.0 + trans_axeZ);
-  glRotatef(20 + angle_rotY, 0, 1, 0);
-  glRotatef(angle_rotX,1,0,0);
-  glScalef(kx,ky,kz);
   
+  glLoadIdentity();
+  
+  glTranslatef(0, 0, -5+trans_axeZ);
+  glRotatef(20+rot_axeY, 0, 1, 0);
+  glRotatef(rot_axeX, 1, 0, 0);
+
+  glScalef(kx, ky, kz);
   /* dessin des objets */
   cube(2.0);
   repere(2.0);
@@ -125,4 +115,17 @@ void dessiner(void)
   glFlush();
   return;
 
+}
+
+extern void retailler(GLsizei largeur, GLsizei hauteur)
+{
+  int cote = hauteur;
+  if(hauteur > largeur)
+    cote = largeur;
+  
+  glViewport(largeur/2 - cote/2,hauteur/2 -cote/2, cote, cote);
+
+  glMatrixMode(GL_PROJECTION);
+  
+  glutPostRedisplay();
 }
